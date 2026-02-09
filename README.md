@@ -4,3 +4,6 @@
 ---
 # react_basic_2
 - 리액트 라우터 사용
+---
+# redux_project
+- 리덕스 사용
