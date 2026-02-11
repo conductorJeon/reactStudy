@@ -1,0 +1,132 @@
+import {Fragment, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useMutation} from "@tanstack/react-query";
+import boardClient from "../board-commons";
+
+export default function BoardInsert() {
+    const nav = useNavigate();
+
+    const [name, setName] = useState<string>("");
+    const [subject, setSubject] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+    const [pwd, setPwd] = useState<string>("");
+
+    const nameRef = useRef<HTMLInputElement>(null);
+    const subjectRef = useRef<HTMLInputElement>(null);
+    const contentRef = useRef<HTMLTextAreaElement>(null);
+    const pwdRef = useRef<HTMLInputElement>(null);
+
+    const {mutate:boardInsert} = useMutation({
+        mutationFn: async() => {
+            return await boardClient.post("/board/insert_node", {
+                name: name,
+                subject: subject,
+                content: content,
+                pwd: pwd
+            })
+        },
+
+        onSuccess: (res) => {
+            if (res.data.msg === 'yes') {
+                window.location.href = '/board/list'
+            } else {
+                alert('게시판 등록에 실패하셨습니다.')
+            }
+        },
+
+        onError: (err:Error) => {
+            console.log("에러 발생 : ", err.message);
+        }
+    })
+
+    const insert = ():void => {
+        if (!name.trim()) {
+            return nameRef.current?.focus();
+        }
+
+        if (!subject.trim()) {
+            return subjectRef.current?.focus();
+        }
+
+        if (!content.trim()) {
+            return contentRef.current?.focus();
+        }
+
+        if (!pwd.trim()) {
+            return pwdRef.current?.focus();
+        }
+
+        boardInsert()
+    }
+
+    return (
+        <Fragment>
+            <div className="breadcumb-area" style={{backgroundImage: "url(../../img/bg-img/breadcumb.jpg)"}}>
+                <div className="container h-100">
+                    <div className="row h-100 align-items-center">
+                        <div className="col-12">
+                            <div className="bradcumb-title text-center">
+                                <h2>react-Query + TypeScript 글쓰기</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="breadcumb-nav">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <nav aria-label="breadcrumb">
+
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section className="archive-area section_padding_80">
+                <div className="container">
+                    <div className="row">
+                        <table className="table">
+                            <tbody>
+                            <tr>
+                                <td width={"15%"}>이름</td>
+                                <td width={"85%"}>
+                                    <input type={"text"} size={15} className={"input-sm"}
+                                        ref={nameRef} value={name} onChange={(e:any):void => setName(e.target.value)} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width={"15%"}>제목</td>
+                                <td width={"85%"}>
+                                    <input type={"subject"} size={55} className={"input-sm"}
+                                        ref={subjectRef} value={subject} onChange={(e:any):void => setSubject(e.target.value)} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width={"15%"}>내용</td>
+                                <td width={"85%"}>
+                                    <textarea rows={10} cols={55} className={"input-sm"}
+                                        ref={contentRef} value={content} onChange={(e:any):void => setContent(e.target.value)} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width={"15%"}>비밀번호</td>
+                                <td width={"85%"}>
+                                    <input type={"password"} size={15} className={"input-sm"}
+                                    ref={pwdRef} value={pwd} onChange={(e:any):void => setPwd(e.target.value)} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2} className={"text-center"}>
+                                    <button className={"btn btn-primary"} onClick={() => insert()}>글쓰기</button>&nbsp;
+                                    <button className={"btn btn-primary"} onClick={() => nav(-1)}>취소</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </Fragment>
+    )
+}

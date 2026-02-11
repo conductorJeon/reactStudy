@@ -11,7 +11,7 @@ interface MapProps {
     name: string;
 }
 
-const AllMap = ({address, name}: MapProps) => {
+const MapPrint = ({address, name}: MapProps) => {
         useEffect(() => {
             const {kakao} = window;
 
@@ -58,4 +58,4 @@ const AllMap = ({address, name}: MapProps) => {
         )
 }
 
-export default AllMap;
+export default MapPrint;

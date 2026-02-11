@@ -34,7 +34,7 @@ export interface JejuItem {
     contentid: number;
     restdate: string;
     infocenter: string;
-    parkinge: string;
+    parking: string;
     msg: string;
     usetime: string;
 }
