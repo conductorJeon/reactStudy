@@ -13,17 +13,18 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
+    "@types/request": "^2.48.13",
     "axios": "^1.13.5",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "oracledb": "^6.10.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-router": "^7.13.0",
     "react-router-dom": "^7.13.0",
     "react-scripts": "5.0.1",
     "request": "^2.88.2",
-    "web-vitals": "^2.1.4",
-    "express": "^5.2.1",
-    "cors": "^2.8.6",
-    "oracledb": "^6.10.0"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -53,6 +54,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.2.3",
+    "@types/oracledb": "^6.10.1",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^4.9.5"

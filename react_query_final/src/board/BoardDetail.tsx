@@ -91,8 +91,8 @@ export default function BoardDetail() {
                             <tr>
                                 <td colSpan={4} className={"text-right"}>
                                     <Link to={"/board/list"} className="btn btn-primary">목록</Link>&nbsp;
-                                    <Link to={"/board/update"} className="btn btn-primary">수정</Link>&nbsp;
-                                    <Link to={"/board/delete"} className="btn btn-primary">삭제</Link>
+                                    <Link to={"/board/update/" + board.NO} className="btn btn-primary">수정</Link>&nbsp;
+                                    <Link to={"/board/delete/" + board.NO} className="btn btn-primary">삭제</Link>
                                 </td>
                             </tr>
                             </tbody>

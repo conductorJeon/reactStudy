@@ -32,7 +32,6 @@ function BoardList() {
     }
 
     if (!data) return null;
-    console.log(data.data)
 
     return (
         <Fragment>
